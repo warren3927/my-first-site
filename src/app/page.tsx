@@ -3,7 +3,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-[#4F4440] text-[#E8F2AD]">
       <div className="max-w-xl w-full rounded-2xl border border-[#655954] bg-[#3E3532]/70 p-10 shadow-2xl backdrop-blur">
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#E8F2AD] text-center leading-snug">
-          안녕하세요,
+          안녕하세요 친구야,
           <br />
           <span className="text-[#8DF68D] underline decoration-[#8DF68D]/50 decoration-wavy">warren</span>입니다
         </h1>
