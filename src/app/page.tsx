@@ -22,6 +22,10 @@ export default function Home() {
           <span className="inline-block w-3 h-3 rounded-full bg-[#8DF68D] animate-pulse" />
           Ready at <span className="font-bold text-[#8DF68D]">localhost:3000</span>
         </div>
+
+        <p className="mt-6 text-center text-[#C84726]">
+          [오늘 처음 인터넷에 사이트를 올렸어요!]
+        </p>
       </div>
     </main>
   );
