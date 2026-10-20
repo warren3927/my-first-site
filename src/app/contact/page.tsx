@@ -22,6 +22,7 @@ export default function ContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -32,15 +33,36 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
 
-    // 문의 제출 시뮬레이션
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "이메일 전송에 실패했습니다.");
+      }
+
       setIsSubmitted(true);
-    }, 600);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorMessage(err.message);
+      } else {
+        setErrorMessage("알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -51,6 +73,7 @@ export default function ContactPage() {
       title: "",
       message: "",
     });
+    setErrorMessage(null);
     setIsSubmitted(false);
   };
 
@@ -126,6 +149,13 @@ export default function ContactPage() {
                 궁금한 점이나 피드백, 응원의 메시지를 자유롭게 남겨주세요!
               </p>
             </div>
+
+            {errorMessage && (
+              <div className="mb-4 p-4 rounded-xl bg-[#C84726]/20 border border-[#C84726] text-[#E8F2AD] text-sm flex items-start gap-2.5">
+                <span className="text-[#C84726] font-bold">⚠️</span>
+                <span>{errorMessage}</span>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
