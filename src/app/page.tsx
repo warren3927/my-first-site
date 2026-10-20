@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-[#4F4440] text-[#E8F2AD]">
@@ -26,6 +28,17 @@ export default function Home() {
         <p className="mt-6 text-center text-[#C84726]">
           [오늘 처음 인터넷에 사이트를 올렸어요!]
         </p>
+
+        <div className="mt-8 pt-6 border-t border-[#655954]/60">
+          <Link
+            href="/contact"
+            className="group flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl font-bold bg-[#8DF68D] text-[#342B28] hover:bg-[#a3f7a3] hover:shadow-lg transition-all duration-200 active:scale-[0.99] text-center"
+          >
+            <span className="text-lg transition-transform duration-200 group-hover:scale-110">✉️</span>
+            <span>문의사항 남기기</span>
+            <span className="text-xs transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </Link>
+        </div>
       </div>
     </main>
   );
